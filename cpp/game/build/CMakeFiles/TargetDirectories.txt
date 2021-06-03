@@ -1,0 +1,4 @@
+/home/zcy/ws/coding/cpp/game/build/CMakeFiles/rebuild_cache.dir
+/home/zcy/ws/coding/cpp/game/build/CMakeFiles/edit_cache.dir
+/home/zcy/ws/coding/cpp/game/build/CMakeFiles/game.dir
+/home/zcy/ws/coding/cpp/game/build/CMakeFiles/gamelib.dir

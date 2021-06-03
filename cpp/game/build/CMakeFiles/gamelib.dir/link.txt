@@ -1,0 +1,2 @@
+/usr/bin/ar qc libgamelib.a  CMakeFiles/gamelib.dir/Hero.cpp.o CMakeFiles/gamelib.dir/Knife.cpp.o CMakeFiles/gamelib.dir/Monster.cpp.o CMakeFiles/gamelib.dir/Sword.cpp.o
+/usr/bin/ranlib libgamelib.a
