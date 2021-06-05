@@ -3,10 +3,32 @@
 
 #include <iostream>
 
-struct node
+class node
 {
+public:
+    node(int key) : val(key), next(nullptr)
+    ~node();
+    node(const node &) = delete;
+    node &operator=(const node &) = default;
+    int getVal() const
+    {
+        return this->val;    
+    }
+    void setVal(const int key)
+    {
+        this->val = key;
+    }
+    node* getNext() const
+    {
+        return this->next;
+    }
+    void setNext(const node *n)
+    {
+        this->next = n;
+    }
+private:
     int val;
-    struct node* next;
+    node* next;
 };
 
 class mylist
@@ -21,15 +43,15 @@ public:
     void pop_front();
     void pop_back();
     bool find(int key) const;
-    void rem(int key);
+    void del(int index);
     bool is_empty() const;
     void insert_before(struct node* n, int key);
     void insert_after(struct node* n, int key); 
 
 
 public:
-    struct node* head;
-    // struct node* tail;
+    node* head;
+    // node* tail;
 // private:
     // int m_size;
 };
