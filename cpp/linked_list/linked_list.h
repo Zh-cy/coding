@@ -2,34 +2,8 @@
 #define __LINKED_LIST__
 
 #include <iostream>
+#include "linked_node.h"
 
-class node
-{
-public:
-    node(int key) : val(key), next(nullptr)
-    ~node();
-    node(const node &) = delete;
-    node &operator=(const node &) = default;
-    int getVal() const
-    {
-        return this->val;    
-    }
-    void setVal(const int key)
-    {
-        this->val = key;
-    }
-    node* getNext() const
-    {
-        return this->next;
-    }
-    void setNext(const node *n)
-    {
-        this->next = n;
-    }
-private:
-    int val;
-    node* next;
-};
 
 class mylist
 {
@@ -44,10 +18,11 @@ public:
     void pop_back();
     bool find(int key) const;
     void del(int index);
-    bool is_empty() const;
-    void insert_before(struct node* n, int key);
-    void insert_after(struct node* n, int key); 
-
+    // bool is_empty() const;
+    void insert_before(int index, int key);
+    void insert_after(int index, int key); 
+    int size() const;
+    void Info() const; 
 
 public:
     node* head;

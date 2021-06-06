@@ -28,8 +28,8 @@ void mylist::push_front(int key)
 void mylist::push_back(int key)
 {
     node *tailnode = new node(key);
-
-    if (!head)
+    tailnode->setNext(nullptr);
+    if (head==nullptr)
     {
         head = tailnode;
         return;
@@ -39,7 +39,7 @@ void mylist::push_back(int key)
     {
         cur = cur->getNext();
     }
-    cur->setNext(tailNode);    
+    cur->setNext(tailnode);    
 }
 
 int mylist::front() const
@@ -81,7 +81,7 @@ void mylist::pop_front()
     delete cur;
 }
 
-void mylist::popback()
+void mylist::pop_back()
 {
     if (!head)
     {
@@ -108,7 +108,7 @@ void mylist::popback()
     delete cur;    
 }
 
-bool mysql::find(int key) const
+bool mylist::find(int key) const
 {
     if (!head)
         return false;
@@ -117,20 +117,127 @@ bool mysql::find(int key) const
     node* cur = head;
     while(cur->getNext())
     {
-        cur = cur->getNext();
+         cur = cur->getNext();
         if (cur->getVal() == key)
             return true;
     }
     return false;
 }
 
-void mysql::del(int index)
+void mylist::del(int index)
 {
-   if (!head)
-   {
+    if (!head)
+    {
         std::cout << "Linked list is empty." << std::endl;
         exit(1);
-        for(int i = 0; i <= index; i++)
-   }
+    }
+    node *prev = nullptr;
+    node *cur = head;
+    for(int i = 0; i < index; i++)
+    {
+        if (!cur)
+        {
+            std::cout << "Index out of bounds." << std::endl;
+            exit(1);
+        }
+        prev = cur;
+        cur = cur->getNext();
+    }
 
+    if(!cur)
+    {
+        std::cout << "Index out of bounds." << std::endl;
+        exit(1);
+    }
+    prev->setNext(cur->getNext());
+    delete cur;
+}
+
+void mylist::insert_before(int index, int key)
+{
+    if (!head)
+    {
+        std::cout << "Linked list is empty." << std::endl;
+        exit(1);
+    }
+    node* prev = nullptr;
+    node* cur = head;
+    for (int i = 0; i < index; i++)
+    {
+        if (!cur)
+        {
+            std::cout << "Index out of bounds." << std::endl;
+            exit(1);
+        }
+        prev = cur;
+        cur = cur->getNext();
+    }
+    
+    if (!cur)
+    {
+        std::cout << "Index out of bounds." << std::endl;
+        exit(1);
+    }
+    
+    node* newnode = new node(key);
+    newnode->setNext(cur);
+    prev->setNext(newnode);
+}
+
+void mylist::insert_after(int index, int key)
+{
+    if (!head)
+    {
+        std::cout << "Linked list is empty." << std::endl;
+        exit(1);
+    }
+    node* cur = head;
+    for (int i=0; i < index; i++)
+    {
+        if (!cur)
+        {
+            std::cout << "Index out of bounds." << std::endl;
+            exit(1);
+        }
+        cur = cur->getNext();
+    }
+    if (!cur)
+    {
+        std::cout << "Index out of bounds." << std::endl;
+        exit(1);
+    }
+
+    node* newnode = new node(key);
+    cur->setNext(newnode);
+    newnode->setNext(cur->getNext());
+}
+
+int mylist::size() const
+{
+    int count = 0;
+    node* cur = head;
+    while (cur)
+    {
+        ++count;
+        cur = cur->getNext();
+    }
+    return count;
+}
+
+void mylist::Info() const
+{ 
+    if (!head)
+    {
+        std::cout << "  Linked list is empty." << std::endl;
+        return;
+    }
+    
+    node *cur = head;
+    std::cout << "Linked list size: " << this->size() << std::endl;
+    std::cout << "Linked list elements: " << std::endl;
+    while (cur)
+    {
+        std::cout << "  " << cur->getVal() << std::endl;
+        cur = cur->getNext();
+    }
 }
