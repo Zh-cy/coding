@@ -45,5 +45,35 @@ int main(void)
     cout << "Front element is: " << l.front() << endl;
     cout << "Back element is: " << l.back() << endl;
     
+    cout << "--------------" << endl;
+    
+    cout << "The second element from back is: " << l.value_from_back(2) << endl;
+    cout << "The 5th element from back is: " << l.value_from_back(5) << endl;
+    
+    cout << "--------------" << endl;
+    
+    l.reverse();
+
+    l.Info();
+    
+    cout << "--------------" << endl;
+    l.pop_back();
+    l.pop_back();
+    l.pop_back();
+    
+    l.Info();
+    cout << "Linked list is reversed now." << endl;
+    l.reverse();
+    l.Info();
+
+    cout << "--------------" << endl;
+    l.pop_front();
+    l.pop_front();
+    l.Info();
+    cout << "Linked list is reversed now." << endl;
+    l.reverse();
+    l.Info();
+
     return 0;
+
 }

@@ -44,7 +44,7 @@ void mylist::push_back(int key)
 
 int mylist::front() const
 {
-    if (!head)
+    if (head==nullptr)
     {
         std::cout << "Linked list is empty." << std::endl;
         exit(1);
@@ -54,7 +54,7 @@ int mylist::front() const
 
 int mylist::back() const
 {
-    if (!head)
+    if (head==nullptr)
     {
         std::cout << "Linked list is empty." << std::endl;
         exit(1);
@@ -70,7 +70,7 @@ int mylist::back() const
 
 void mylist::pop_front()
 {
-    if (!head)
+    if (head==nullptr)
     {
         std::cout << "Linked list is empty." << std::endl;
         exit(1);
@@ -83,7 +83,7 @@ void mylist::pop_front()
 
 void mylist::pop_back()
 {
-    if (!head)
+    if (head==nullptr)
     {
         std::cout << "Linked list is empty." << std::endl;
         exit(1);
@@ -98,7 +98,7 @@ void mylist::pop_back()
         cur = cur->getNext();
     }    
     
-    if (!prev)
+    if (prev==nullptr)
     {
         head = nullptr;
         delete cur;
@@ -126,7 +126,7 @@ bool mylist::find(int key) const
 
 void mylist::del(int index)
 {
-    if (!head)
+    if (head==nullptr)
     {
         std::cout << "Linked list is empty." << std::endl;
         exit(1);
@@ -135,7 +135,7 @@ void mylist::del(int index)
     node *cur = head;
     for(int i = 0; i < index; i++)
     {
-        if (!cur)
+        if (cur==nullptr)
         {
             std::cout << "Index out of bounds." << std::endl;
             exit(1);
@@ -144,7 +144,7 @@ void mylist::del(int index)
         cur = cur->getNext();
     }
 
-    if(!cur)
+    if(cur==nullptr)
     {
         std::cout << "Index out of bounds." << std::endl;
         exit(1);
@@ -155,7 +155,7 @@ void mylist::del(int index)
 
 void mylist::insert_before(int index, int key)
 {
-    if (!head)
+    if (head==nullptr)
     {
         std::cout << "Linked list is empty." << std::endl;
         exit(1);
@@ -164,7 +164,7 @@ void mylist::insert_before(int index, int key)
     node* cur = head;
     for (int i = 0; i < index; i++)
     {
-        if (!cur)
+        if (cur==nullptr)
         {
             std::cout << "Index out of bounds." << std::endl;
             exit(1);
@@ -173,7 +173,7 @@ void mylist::insert_before(int index, int key)
         cur = cur->getNext();
     }
     
-    if (!cur)
+    if (cur==nullptr)
     {
         std::cout << "Index out of bounds." << std::endl;
         exit(1);
@@ -186,7 +186,7 @@ void mylist::insert_before(int index, int key)
 
 void mylist::insert_after(int index, int key)
 {
-    if (!head)
+    if (head==nullptr)
     {
         std::cout << "Linked list is empty." << std::endl;
         exit(1);
@@ -194,14 +194,14 @@ void mylist::insert_after(int index, int key)
     node* cur = head;
     for (int i=0; i < index; i++)
     {
-        if (!cur)
+        if (cur==nullptr)
         {
             std::cout << "Index out of bounds." << std::endl;
             exit(1);
         }
         cur = cur->getNext();
     }
-    if (!cur)
+    if (cur==nullptr)
     {
         std::cout << "Index out of bounds." << std::endl;
         exit(1);
@@ -216,7 +216,7 @@ int mylist::size() const
 {
     int count = 0;
     node* cur = head;
-    while (cur)
+    while (cur!=nullptr)
     {
         ++count;
         cur = cur->getNext();
@@ -226,7 +226,7 @@ int mylist::size() const
 
 void mylist::Info() const
 { 
-    if (!head)
+    if (head==nullptr)
     {
         std::cout << "  Linked list is empty." << std::endl;
         return;
@@ -235,9 +235,58 @@ void mylist::Info() const
     node *cur = head;
     std::cout << "Linked list size: " << this->size() << std::endl;
     std::cout << "Linked list elements: " << std::endl;
-    while (cur)
+    while (cur!=nullptr)
     {
         std::cout << "  " << cur->getVal() << std::endl;
         cur = cur->getNext();
     }
+}
+
+int mylist::value_from_back(int index) const
+{
+    if (index < 1 || head==nullptr)
+    {
+        std::cout << "Index out of bounds." << std::endl;
+        exit(1);
+    }
+
+    node* fast = head;
+    node* slow = head;
+
+    for (int i=0; i<index; i++)
+    {
+        if (fast==nullptr)
+        {
+            std::cout << "Index out of bounds." << std::endl;
+            exit(1);
+        }
+        fast = fast->getNext();
+    }
+    while (fast!=nullptr)
+    {
+        slow = slow->getNext();
+        fast = fast->getNext();
+    }
+    return slow->getVal();
+}
+
+void mylist::reverse()
+{
+    if (head==nullptr)
+    {
+        std::cout << "Linked list is empty." << std::endl;
+        exit(1);
+    }
+    node* prev = nullptr;
+    node* cur = head;
+    
+    while (cur!=nullptr)
+    {
+        node* ne = cur->getNext();
+        cur->setNext(prev);
+        prev = cur;
+        cur = ne;
+    }
+
+    head = prev;
 }
