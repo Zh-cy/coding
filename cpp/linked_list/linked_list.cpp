@@ -208,8 +208,8 @@ void mylist::insert_after(int index, int key)
     }
 
     node* newnode = new node(key);
-    cur->setNext(newnode);
     newnode->setNext(cur->getNext());
+    cur->setNext(newnode);
 }
 
 int mylist::size() const
