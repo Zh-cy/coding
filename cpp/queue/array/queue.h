@@ -1,3 +1,6 @@
+#ifndef __QUEUE__
+#define __QUEUE__
+
 #include <iostream>
 
 class myqueue
@@ -21,3 +24,5 @@ private:
     int m_write;
     int m_queue[m_size];
 };
+
+#endif
