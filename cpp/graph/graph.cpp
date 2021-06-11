@@ -33,10 +33,48 @@ bool graph::isEdge(int v1, int v2) const
     if (iter != m_vertex[v1].end())
     {
         cout << "Found edge: " << v1 << "-" << v2 << endl;
-    cout << "-------------------" << endl;
+        cout << "-------------------" << endl;
         return true;
     }
     cout << "Didn't find edge: " << v1 << "-" << v2 << endl;
     cout << "-------------------" << endl;
     return false;
+}
+
+int graph::bfs(int v) const
+{
+    int path[m_num];
+    memset(path, -1, sizeof(path));
+    path[v] = 0;
+    
+    queue<int> q;
+    q.push(v);
+
+    while (!q.empty())
+    {
+        int node = q.front();
+        q.pop();
+
+        for (list<int>::iterator iter=m_vertex[node].begin(); iter!=m_vertex[node].end(); iter++)
+        {
+            if (path[*iter]==-1)
+            {
+                q.push(*iter);
+                path[*iter]=path[node]+1;
+            }
+            else
+                continue;
+        }
+    }
+    
+    int maxdis = 0;
+
+    for (int i=0; i<m_num; i++)
+    {
+        if (path[i]>maxdis)
+        {
+            maxdis = path[i];
+        }
+    }
+    return maxdis;
 }

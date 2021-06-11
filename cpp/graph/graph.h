@@ -2,8 +2,9 @@
 #define __GRAPH__
 
 #include <iostream>
-#include <vector>
+#include <queue>
 #include <list>
+#include <cstring>
 #include <algorithm>
 
 using namespace std;
@@ -19,6 +20,8 @@ public:
 public:
     void addEdge(int v1, int v2);
     bool isEdge(int v1, int v2) const;
+    int bfs(int v) const;
+    int FarthestPath(int *path);
     void Info() const;
 
 private:
