@@ -41,7 +41,7 @@ bool graph::isEdge(int v1, int v2) const
     return false;
 }
 
-int graph::bfs(int v) const
+int graph::bfsMaxDis(int v) const
 {
     int path[m_num];
     memset(path, -1, sizeof(path));
@@ -78,3 +78,37 @@ int graph::bfs(int v) const
     }
     return maxdis;
 }
+
+// this is for directed graph
+/*
+
+int father[m_num];
+
+void graph::dfsFindCircle(int v, int* color)
+{
+    // 0-not visited node; 1-visiting node; 2-all child nodes of this node are visited
+    color[v] = 1; 
+    for (list<int>::iterator iter=m_vertex[v].begin(); iter!=m_vertex[v].end(); iter++)
+    {
+        // if this child node isn't visited
+        // 1. record his father node (current node)
+        // 2. work on this child node (dfs-depth first)
+        if (color[*iter]==0)
+        {
+            father[*iter] = v;
+            dfsFindCircle(*iter, color);
+        }
+        // 1. this child node is beeing visited
+        // 2. this child is not father node of current node
+        // that means we found the circle!
+        else if (color[*iter]==1 && father[*iter]!=v)
+        {
+            hasCircle = true;
+            break;
+        }
+    }
+    // all child nodes are visited and no circle detected
+    // that means there is no circle 
+    color[v] = 2;
+}
+*/

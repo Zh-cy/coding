@@ -4,6 +4,7 @@
 #include <iostream>
 #include <queue>
 #include <list>
+#include <stack>
 #include <cstring>
 #include <algorithm>
 
@@ -20,9 +21,11 @@ public:
 public:
     void addEdge(int v1, int v2);
     bool isEdge(int v1, int v2) const;
-    int bfs(int v) const;
-    int FarthestPath(int *path);
+    int bfsMaxDis(int v) const;
+    bool cycle() const;
     void Info() const;
+    //void dfsFindCircle(int v, int* color);
+    // bool hasCircle = false;
 
 private:
     int m_num;
